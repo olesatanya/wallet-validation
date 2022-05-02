@@ -26,7 +26,6 @@ const Header = () => {
 								<Link to="/admin" className={`header-menu`} >Admin</Link>
 								<Link to="/" className={`header-menu`} onClick={() => {update({userid:0})}}>Logout</Link>
 							</>}
-							
 							<span className="side-menu pointer" onClick={() => { updateStatus({ showSideMenu : true }) }}><img src={menu} alt={'menu'} /></span>
 						</div>
 					</div>

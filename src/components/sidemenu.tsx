@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
+import React from 'react'
 import { Close } from '../components/Icons'
 import logo from '../assets/img/logo.png'
+import '../assets/scss/wallet.scss'
 
+import useStore from '../useStore'
 
 interface SideMenuProps {
 	menushow: boolean
@@ -9,6 +12,13 @@ interface SideMenuProps {
 }
 
 const SideMenu = ({ menushow,  onClose }: SideMenuProps) => {
+	
+	const {	update, userid } = useStore()
+	const updateStatus = (params : {[key : string] : string | number | boolean | any}) => setStates({ ...state, ...params })
+	const [state, setStates] = React.useState({
+		showSideMenu : false
+	})
+
 	return (
 		<>
 			<div className={`side-menu-panel `} style={{right:`${menushow?'0':'-102%'}`}}>
@@ -18,12 +28,11 @@ const SideMenu = ({ menushow,  onClose }: SideMenuProps) => {
 						<Close width={20} height={20} />
 					</span>
 				</div>
-				<Link to="../" className='side-menu'>Home</Link>
-				<Link to="../" className='side-menu'>About Us</Link>
-				<Link to="../" className='side-menu'>Features</Link>
-				<Link to="../" className='side-menu'>Satify</Link>
-				<Link to="../" className='side-menu'>Blog</Link>
-				<Link to="../" className='side-menu'>Contact</Link>
+				<Link to="/" className={`header-menu`}>Home</Link>
+				{userid===0? <Link to="/login" className={`header-menu active`}>Sign In</Link> : <>
+					<Link to="/admin" className={`header-menu`} >Admin</Link>
+					<Link to="/" className={`header-menu`} onClick={() => {update({userid:0})}}>Logout</Link>
+				</>}
 
 				<Link to="../login" className='side-menu active'>Login</Link>
 			</div>

