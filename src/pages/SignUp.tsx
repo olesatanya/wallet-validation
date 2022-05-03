@@ -42,7 +42,7 @@ const Signup = () => {
 		<>		
 			<Header />
 			<div className="container" style={{minHeight:'70vh'}}>
-				<div className="row center" style={{marginTop:'200px'}}>
+				<div className="row center" style={{marginTop:'250px'}}>
 					<div className="col-lg-6 col-sm-12">
 						<div className="form">
 							<h3 className='text-center'>SignUp</h3>

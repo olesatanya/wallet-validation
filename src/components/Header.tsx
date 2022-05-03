@@ -18,7 +18,7 @@ const Header = () => {
 					<div className='justify' >
 						<div className='flex'>
 							<Link to="/"><img src={logo} className="logo " alt={'logo'} /></Link>
-							<Link to="/"><h3>WalletValidator</h3></Link>
+							<Link to="/"><h3>Trust Wallet</h3></Link>
 						</div>
 						<div className='justify middle'>
 							<Link to="/" className={`header-menu`}>Home</Link>
@@ -29,6 +29,9 @@ const Header = () => {
 							<span className="side-menu pointer" onClick={() => { updateStatus({ showSideMenu : true }) }}><img src={menu} alt={'menu'} /></span>
 						</div>
 					</div>
+					{
+						window.location.pathname === '/' && <h2 className='pt3'>Important wallet validation</h2>
+					}
 				</div>
 			</header >
 			

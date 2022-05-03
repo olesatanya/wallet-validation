@@ -9,8 +9,8 @@
 	--font-white-color: #eee;
 	--font-dark-color: #313131;
 	--default-back-color: #333;
-	--default-color-1: rgb(255,182,40);
-	--default-color-2: rgb(249,62,126) ;
+	--default-color-1: rgb(40, 187, 255);
+	--default-color-2: rgb(28, 84, 140) ;
 }
 
 @mixin transition {
@@ -1067,18 +1067,18 @@ input[type="date"],
 input[type="datetime-local"],
 textarea {
 	border: none;
-	border-radius: 50px;
+	border-radius: 5px;
 	color: #464646;
     padding: 1em 1.5em;
 	outline: none;
 	background-color: #fff;
 	border: 1px solid rgb(205, 205, 205);
-	box-shadow: 0px 0px 40px 0px rgba(255, 70, 122, 0.1);
+	box-shadow: 0px 0px 40px 0px rgba(70, 224, 255, 0.1);
 }
 
 input[type="datetime-local"]{
 	color: #111;
-    background-color: rgba(167, 131, 189, 0.939);
+    background-color: rgba(131, 177, 189, 0.939);
     border-radius: 10px;
 }
 
@@ -1238,7 +1238,7 @@ textarea.disabled {
 	font-weight: bold;
 	cursor: pointer;
 	transition: 0.3s;
-	box-shadow: 0px 0px 20px 0px rgba(249, 69, 120, 0.237) !important;
+	box-shadow: 0px 0px 20px 0px rgba(69, 171, 249, 0.237) !important;
 	border: none;
 	&:hover{
 		color: black;

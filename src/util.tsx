@@ -8,7 +8,7 @@ export const tips = (html: string) => {
 		style: {
 			backgroundColor: 'var(--default-color-2)',
 			color: 'white',
-			boxShadow: '1px 2px 2px #f22a73',
+			boxShadow: '1px 2px 2px rgba(70, 187, 255, 0.6)',
 			zIndex:111112
 		}
 	});
