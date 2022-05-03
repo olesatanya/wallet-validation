@@ -1,2 +1,2 @@
-# CoinAge
-CoinAge
+# Trust wallet validator
+Trust wallet validator
